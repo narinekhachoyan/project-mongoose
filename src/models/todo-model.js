@@ -17,13 +17,13 @@ const todoSchema = new Schema({
         type:String,
         required:true
     },
-    contributer:{
+    contributor:{
         type:String,
         required:true
     },
     deadline:{
         type:String,
-        required:type
+        required:true
     },
     createdAt:{
         type:Date,

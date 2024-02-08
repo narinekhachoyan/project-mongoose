@@ -17,13 +17,13 @@ export const getUser = async (req, res) => {
 export const deleteUser = async (req, res) => {
     try{
         const { email } = req.body;
-        const { authorization } = req.headers;
-        const user = JWT.verify(authorization, 'bubu' )
+        // const { authorization } = req.headers;
+        // const user = JWT.verify(authorization, 'bubu' )
 
-        if(!user.email){
-            throw new Error("No such user")
-        }
-        const deletedUser = await User.findOneAndDelete({ email });
+        // if(!user.email){
+        //     throw new Error("No such user")
+        // }
+        const deletedUser = await User.deleteOne({ email });
         
         res.status(201).send({data: deletedUser})
     } catch (e) {
@@ -33,18 +33,21 @@ export const deleteUser = async (req, res) => {
 
 export const updateUser = async (req, res) => {
     try {
-        const filter = req.query
-        await User.find(filter)
+        // const filter = req.query
+        // const user = await User.find(filter);
 
-        const updateData = req.body;
-        const { authorization } = req.headers;
-        const user = JWT.verify(authorization, 'bubu' )
+        // const updateData = req.body;
+        // const { authorization } = req.headers;
+        // const user = JWT.verify(authorization, 'bubu' )
 
-        if(!user.email){
-            throw new Error("No such user")
-        }
-        const updateUser = await User.updateOne({}, {$set:updateData})
-        res.status(201).send({data:updateUser})
+        // if(!user){
+        //     throw new Error("No such user")
+        // }
+        await User.updateMany({},{$set:{city: "Yerevan"}})
+        await User.save()
+    
+        
+        res.status(201).send({data:"OK"})
     } catch (e) {
         res.status(404).send({data:e.message})
     }
